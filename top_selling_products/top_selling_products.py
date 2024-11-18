@@ -38,6 +38,7 @@ MonthlySales AS (
         ProdUpc,
         ProdDescription,
         SalName,
+        CusNumber,
         CusName,
         SUM(SalSales) AS MonthlyTotalSales,
         CASE
@@ -54,6 +55,7 @@ MonthlySales AS (
         ProdUpc,
         ProdDescription,
         SalName,
+        CusNumber,
         CusName,
         CASE
             WHEN MONTH(SalDate) BETWEEN 4 AND 6 THEN 'Q1'
@@ -68,6 +70,7 @@ QuarterlySales AS (
         ProdUpc,
         ProdDescription,
         SalName,
+        CusNumber,
         CusName,
         SUM(SalSales) AS QuarterlyTotalSales,
         CASE
@@ -90,6 +93,7 @@ QuarterlySales AS (
         ProdUpc,
         ProdDescription,
         SalName,
+        CusNumber,
         CusName,
         CASE
             WHEN MONTH(SalDate) BETWEEN 4 AND 6 THEN 'Q1'
@@ -100,8 +104,9 @@ QuarterlySales AS (
 )
 
 SELECT
-    ms.SalName,
+    ms.SalName AS Rep,
     CONCAT(r.DescripJamp, ' ', r.ForceStnd, ' ', r.PackType, ' ', r.PackStnd) AS Product,
+    ms.CusNumber,
     ms.CusName,
     FORMAT(ms.MonthlyTotalSales, 'C', 'en-CA') AS MonthlyTotalSales,
     FORMAT(qs.QuarterlyTotalSales, 'C', 'en-CA') AS QuarterlyTotalSales
